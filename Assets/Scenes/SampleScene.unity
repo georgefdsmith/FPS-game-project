@@ -3996,8 +3996,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1415363699}
   xRotation: 0
-  xSens: 30
-  ySens: 30
+  xSens: 15
+  ySens: 15
 --- !u!114 &996623000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5946,7 +5946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 
-  path: {fileID: 0}
+  path: {fileID: 1689718227}
 --- !u!195 &1604539971
 NavMeshAgent:
   m_ObjectHideFlags: 0

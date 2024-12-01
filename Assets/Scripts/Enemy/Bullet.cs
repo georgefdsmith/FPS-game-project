@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private void OnColliosionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         Transform hitTransform = collision.transform;
         if (hitTransform.CompareTag("Player"))

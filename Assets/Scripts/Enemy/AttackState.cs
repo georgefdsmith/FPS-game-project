@@ -25,8 +25,17 @@ public class AttackState : BaseState
             losePlayerTimer = 0;
             moveTimer += Time.deltaTime;
             shotTimer += Time.deltaTime;
-            enemy.transform.LookAt(enemy.Player.transform);
-            if(shotTimer > enemy.fireRate)
+
+            Vector3 directionToPlayer = enemy.Player.transform.position - enemy.transform.position;
+            directionToPlayer.y = 0; 
+
+            if (directionToPlayer != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+                enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, lookRotation, Time.deltaTime * 5f); 
+            }
+
+            if (shotTimer > enemy.fireRate)
             {
                 Shoot();
             }
@@ -36,13 +45,15 @@ public class AttackState : BaseState
                 enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 5));
                 moveTimer = 0;
             }
+
+            enemy.LastKnowPos = enemy.Player.transform.position;
         }
         else
         {
             losePlayerTimer += Time.deltaTime;
             if (losePlayerTimer > 8)
             {
-                stateMachine.ChangeState(new PatrolState());
+                stateMachine.ChangeState(new SearchState());
             }
         }
 
@@ -56,7 +67,7 @@ public class AttackState : BaseState
 
         Vector3 shootDirection = (enemy.Player.transform.position - gunbarrel.transform.position).normalized;
 
-        bullet.GetComponent<Rigidbody>().velocity = shootDirection * 40;
+        bullet.GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(Random.Range(-3f,3f), Vector3.up) * shootDirection * 60;
         Debug.Log("Shoot");
         shotTimer = 0;
     }

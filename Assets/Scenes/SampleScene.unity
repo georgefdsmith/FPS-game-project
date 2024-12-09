@@ -2522,6 +2522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 573680227}
+  - component: {fileID: 573680228}
   m_Layer: 0
   m_Name: GunBarrel
   m_TagString: Untagged
@@ -2538,12 +2539,30 @@ Transform:
   m_GameObject: {fileID: 573680226}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3368, y: 0.4434, z: 1.041}
+  m_LocalPosition: {x: 0.338, y: 0.4434, z: 1.046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 996623003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &573680228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573680226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8e1613144e84148b0330346e7b41a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socket: {fileID: 573680227}
+  prefabFlashParticles: {fileID: 4834526503407549940, guid: ae0697c3ff2d3ab418184d46644293dc, type: 3}
+  flashParticlesCount: 5
+  prefabFlashLight: {fileID: 4171051858075953094, guid: 866499a0b6934b148af3826672ed7887, type: 3}
+  flashLightDuration: 0
+  flashLightOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &590616730
 GameObject:
   m_ObjectHideFlags: 0
@@ -4320,6 +4339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunBarrel: {fileID: 573680227}
   shootEffect: {fileID: 0}
+  muzzle: {fileID: 573680228}
 --- !u!1 &1034172369
 GameObject:
   m_ObjectHideFlags: 0

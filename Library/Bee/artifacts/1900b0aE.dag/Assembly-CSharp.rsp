@@ -362,6 +362,7 @@
 "Assets/Input/PlayerInput.cs"
 "Assets/Scripts/Enemy/Bullet.cs"
 "Assets/Scripts/Enemy/Enemy.cs"
+"Assets/Scripts/Enemy/Health.cs"
 "Assets/Scripts/Enemy/Path.cs"
 "Assets/Scripts/Enemy/StateMachine.cs"
 "Assets/Scripts/Enemy/States/AttackState.cs"
@@ -377,6 +378,7 @@
 "Assets/Scripts/Player/PlayerInteract.cs"
 "Assets/Scripts/Player/PlayerLook.cs"
 "Assets/Scripts/Player/PlayerMotor.cs"
+"Assets/Scripts/Player/PlayerShoot.cs"
 "Assets/Scripts/Player/PlayerUI.cs"
 -langversion:9.0
 /deterministic

@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent Agent {  get => agent; }
     public GameObject Player { get => player; }
     public Vector3 LastKnowPos { get => lastKnowPos; set => lastKnowPos = value; }
+    public GameObject deathEffect;
 
     public Path path;
     [Header("Sight Values")]
@@ -67,5 +68,16 @@ public class Enemy : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void Die()
+    {
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+
+        Destroy(transform.root.gameObject);
+        Debug.Log("Enemy Died");
     }
 }

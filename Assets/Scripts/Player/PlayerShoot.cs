@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public Transform gunBarrel;
-    public GameObject shootEffect;
+    [SerializeField] private float hitscanRange = 100f;
+    [SerializeField] private LayerMask hitscanLayers;
 
     public Muzzle muzzle;
 
@@ -13,14 +14,16 @@ public class PlayerShoot : MonoBehaviour
     {
         Transform gunbarrel = gunBarrel;
 
-        // Create the bullet
-        GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, gunbarrel.position, gunBarrel.rotation);
-
-        bullet.GetComponent<Rigidbody>().velocity = gunBarrel.forward * 50;
-
-        if (shootEffect != null)
+        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, hitscanRange, hitscanLayers))
         {
-            GameObject effect = Instantiate(shootEffect, gunBarrel.position, gunBarrel.rotation);
+            Debug.Log(hit.collider.gameObject.name);
+
+            Health enemyHealth = hit.collider.GetComponent<Health>();
+
+            if(enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(10);
+            }
         }
 
         if (muzzle != null)

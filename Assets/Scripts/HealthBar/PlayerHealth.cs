@@ -13,10 +13,14 @@ public class PlayerHealth : MonoBehaviour
     public Image frontHealthBar;
     public Image backHealthBar;
 
+
     [Header("Damage Overlay")]
     public Image overlay;
     public float duration;
     public float fadeSpeed;
+
+    [Header("Death Overlay")]
+    public Image deathScreen;
 
     private float durationTimer;
 
@@ -25,6 +29,11 @@ public class PlayerHealth : MonoBehaviour
     {
         health = maxHealth;
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
+
+        if (deathScreen != null)
+        {
+            deathScreen.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -32,17 +41,18 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
-        if(overlay.color.a > 0)
+        if (overlay.color.a > 0)
         {
             if (health < 30)
                 return;
             durationTimer += Time.deltaTime;
-            if(durationTimer > duration)
+            if (durationTimer > duration)
             {
                 float tempAlpha = overlay.color.a;
                 tempAlpha -= Time.deltaTime * fadeSpeed;
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
             }
+
         }
     }
 
@@ -50,13 +60,13 @@ public class PlayerHealth : MonoBehaviour
     {
         float fillF = frontHealthBar.fillAmount;
         float fillB = backHealthBar.fillAmount;
-        float hFraction = health/maxHealth;
-        if(fillB > hFraction)
+        float hFraction = health / maxHealth;
+        if (fillB > hFraction)
         {
             frontHealthBar.fillAmount = hFraction;
             backHealthBar.color = Color.red;
             lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer/chipSpeed;
+            float percentComplete = lerpTimer / chipSpeed;
             percentComplete = percentComplete * percentComplete;
             backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
         }
@@ -71,18 +81,41 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+
     public void TakeDamage(float damage)
     {
         Debug.Log("Player Took Damage");
         health -= damage;
         lerpTimer = 0f;
-        durationTimer = 0; 
-        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+        durationTimer = 0;
+
+        
+        if (health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+        }
+
     }
 
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
         lerpTimer = 0f;
+    }
+
+    public void Die()
+    {
+        if (deathScreen != null)
+        {
+            deathScreen.enabled = true;
+        }
+
+        Time.timeScale = 0f;
+
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }

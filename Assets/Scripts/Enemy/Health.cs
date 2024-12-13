@@ -13,6 +13,8 @@ public class Health : MonoBehaviour
     [Header("Health")]
     public int maxHealth = 100;
 
+    private DamageFlash damageFlash;
+
     // Start is called before the first frame update
     void Start()
     {

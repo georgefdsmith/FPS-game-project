@@ -14,17 +14,24 @@ public class PlayerShoot : MonoBehaviour
     {
         Transform gunbarrel = gunBarrel;
 
-        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, hitscanRange, hitscanLayers))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, hitscanRange, hitscanLayers))
         {
             Debug.Log(hit.collider.gameObject.name);
 
             Health enemyHealth = hit.collider.GetComponent<Health>();
+            DamageFlash enemyFlashEffect = hit.collider.GetComponent<DamageFlash>();
 
-            if(enemyHealth != null)
+            if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(10);
+                enemyHealth.TakeDamage(10); 
+            }
+
+            if (enemyFlashEffect != null)
+            {
+                enemyFlashEffect.FlashColour();
             }
         }
+
 
         if (muzzle != null)
         {

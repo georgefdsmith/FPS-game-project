@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
         CanSeePlayer();
         currentState = stateMachine.activeState.ToString();
     }
+
     public bool CanSeePlayer()
     {
         if (player != null)

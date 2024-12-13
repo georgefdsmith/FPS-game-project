@@ -375,6 +375,7 @@
 "Assets/JMO Assets/WarFX/Scripts/WFX_LightFlicker.cs"
 "Assets/JMO Assets/WarFX/Spawn System/CFX_SpawnSystem.cs"
 "Assets/Scripts/Enemy/Bullet.cs"
+"Assets/Scripts/Enemy/DamageFlash.cs"
 "Assets/Scripts/Enemy/Enemy.cs"
 "Assets/Scripts/Enemy/Health.cs"
 "Assets/Scripts/Enemy/Path.cs"

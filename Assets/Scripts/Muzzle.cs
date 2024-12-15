@@ -32,6 +32,9 @@ public class Muzzle : MonoBehaviour
     [SerializeField]
     private Vector3 flashLightOffset;
 
+    [Header("Sound effect")]
+    private AudioSource audioSource;
+
     /// <summary>
     /// Instantiated Particle System.
     /// </summary>
@@ -40,6 +43,11 @@ public class Muzzle : MonoBehaviour
     /// Instantiated light.
     /// </summary>
     private Light flashLight;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Awake()
     {
@@ -87,6 +95,16 @@ public class Muzzle : MonoBehaviour
             flashLight.enabled = true;
             //Disable the light after a few seconds.
             StartCoroutine(nameof(DisableLight));
+        }
+
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();        
+            Debug.Log("AudioSource played.");
+        }
+        else
+        {
+            Debug.LogError("AudioSource or AudioClip is missing.");
         }
     }
 
